@@ -200,6 +200,213 @@
             border-radius: 8px;
         }
 
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 350px;
+        }
+
+        .notification {
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            backdrop-filter: blur(10px);
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--notification-color);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .notification.hide {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+        }
+
+        .notification-icon {
+            margin-right: 0.5rem;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-time {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .notification-message {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.4;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 0;
+            font-size: 1rem;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .notification-close:hover {
+            opacity: 1;
+        }
+
+        .notification.success { --notification-color: #10b981; }
+        .notification.warning { --notification-color: #f59e0b; }
+        .notification.info { --notification-color: #3b82f6; }
+        .notification.error { --notification-color: #ef4444; }
+
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            animation: bounce-glow 2s infinite;
+            z-index: 10;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes bounce-glow {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            }
+            25% { 
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(239, 68, 68, 0.8);
+            }
+            75% { 
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+            }
+        }
+
+        .card-badge.price { 
+            background: #3b82f6; 
+            animation: bounce-glow-blue 2s infinite;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .card-badge.school { 
+            background: #10b981; 
+            animation: bounce-glow-green 2s infinite;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .card-badge.competition { 
+            background: #f59e0b; 
+            animation: bounce-glow-yellow 2s infinite;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .card-badge.press { 
+            background: #ef4444; 
+            animation: bounce-glow 2s infinite;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes bounce-glow-green {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            }
+            25% { 
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(16, 185, 129, 0.8);
+            }
+            75% { 
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+            }
+        }
+
+        @keyframes bounce-glow-blue {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+            }
+            25% { 
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(59, 130, 246, 0.8);
+            }
+            75% { 
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+            }
+        }
+
+        @keyframes bounce-glow-yellow {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+            }
+            25% { 
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(245, 158, 11, 0.8);
+            }
+            75% { 
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+            }
+        }
+
         .pulse {
             display: inline-block;
             width: 8px;
@@ -243,6 +450,8 @@
     </style>
 </head>
 <body>
+    <div class="notification-container" id="notificationContainer"></div>
+    
     <div class="container">
         <header class="header">
             <h1>Intelligence Dashboard</h1>
@@ -252,6 +461,7 @@
         <div class="dashboard-grid">
             <!-- Price Monitor -->
             <div class="monitor-card price-monitor">
+                <div class="card-badge price">3</div>
                 <div class="card-header">
                     <div class="card-header-left">
                         <div class="card-icon">
@@ -286,6 +496,7 @@
 
             <!-- School Monitor -->
             <div class="monitor-card school-monitor">
+                <div class="card-badge school">1</div>
                 <div class="card-header">
                     <div class="card-header-left">
                         <div class="card-icon">
@@ -320,6 +531,7 @@
 
             <!-- Competition Monitor -->
             <div class="monitor-card competition-monitor">
+                <div class="card-badge competition">2</div>
                 <div class="card-header">
                     <div class="card-header-left">
                         <div class="card-icon">
@@ -354,6 +566,7 @@
 
             <!-- Press Clipping Monitor -->
             <div class="monitor-card press-monitor">
+                <div class="card-badge press">4</div>
                 <div class="card-header">
                     <div class="card-header-left">
                         <div class="card-icon">
@@ -529,6 +742,118 @@
 
         // Initialize charts when page loads
         window.addEventListener('load', initCharts);
+
+        // Notification system
+        class NotificationManager {
+            constructor() {
+                this.container = document.getElementById('notificationContainer');
+                this.notifications = [];
+                this.startFakeNotifications();
+            }
+
+            createNotification(type, title, message, icon) {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('en-US', { 
+                    hour12: false,
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                notification.innerHTML = `
+                    <div class="notification-header">
+                        <div class="notification-title">
+                            <div class="notification-icon">
+                                <i class="${icon}"></i>
+                            </div>
+                            ${title}
+                        </div>
+                        <div class="notification-time">${timeString}</div>
+                        <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+                    </div>
+                    <div class="notification-message">${message}</div>
+                `;
+
+                this.container.appendChild(notification);
+                
+                // Trigger animation
+                setTimeout(() => notification.classList.add('show'), 100);
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    notification.classList.add('hide');
+                    setTimeout(() => notification.remove(), 400);
+                }, 5000);
+
+                return notification;
+            }
+
+            startFakeNotifications() {
+                const fakeNotifications = [
+                    {
+                        type: 'success',
+                        title: 'Price Alert',
+                        message: 'Product #247 price decreased by 5.2% - potential opportunity detected',
+                        icon: 'fas fa-chart-line'
+                    },
+                    {
+                        type: 'info',
+                        title: 'New Tender',
+                        message: 'School District 15 published new IT equipment tender worth €45,000',
+                        icon: 'fas fa-graduation-cap'
+                    },
+                    {
+                        type: 'warning',
+                        title: 'Competitor Activity',
+                        message: 'TechCorp launched new marketing campaign - 3 social media posts detected',
+                        icon: 'fas fa-trophy'
+                    },
+                    {
+                        type: 'info',
+                        title: 'Media Mention',
+                        message: 'Your company mentioned in TechNews article about industry trends',
+                        icon: 'fas fa-newspaper'
+                    },
+                    {
+                        type: 'success',
+                        title: 'System Update',
+                        message: 'Price monitoring system updated - now tracking 12 new products',
+                        icon: 'fas fa-cog'
+                    },
+                    {
+                        type: 'warning',
+                        title: 'Tender Deadline',
+                        message: 'Reminder: University tender submission deadline in 2 days',
+                        icon: 'fas fa-clock'
+                    }
+                ];
+
+                let index = 0;
+                
+                // Show first notification after 3 seconds
+                setTimeout(() => {
+                    this.showNextNotification(fakeNotifications, index);
+                }, 3000);
+            }
+
+            showNextNotification(notifications, index) {
+                if (index < notifications.length) {
+                    const notif = notifications[index];
+                    this.createNotification(notif.type, notif.title, notif.message, notif.icon);
+                    
+                    // Schedule next notification (random interval between 8-15 seconds)
+                    const nextDelay = Math.random() * 7000 + 8000;
+                    setTimeout(() => {
+                        this.showNextNotification(notifications, (index + 1) % notifications.length);
+                    }, nextDelay);
+                }
+            }
+        }
+
+        // Initialize notification system
+        const notificationManager = new NotificationManager();
     </script>
 </body>
 </html>
