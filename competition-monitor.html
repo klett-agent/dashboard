@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Monitor | Intelligence Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .section {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-item {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .announcement-item { --accent-color: #f59e0b; }
+        .social-item { --accent-color: #8b5cf6; }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .content-type {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .content-date {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .content-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-company {
+            color: #60a5fa;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .content-text {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-metrics {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .metric {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .engagement-high { color: #34d399; }
+        .engagement-medium { color: #fbbf24; }
+        .engagement-low { color: #94a3b8; }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+            <h1 class="page-title">COMPETITION MONITOR</h1>
+            <div></div>
+        </div>
+
+        <div class="content-grid">
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-bullhorn" style="color: #f59e0b;"></i>
+                    Recent Announcements
+                </div>
+
+                <div class="content-item announcement-item">
+                    <div class="content-header">
+                        <span class="content-type">Product Launch</span>
+                        <span class="content-date">3 hours ago</span>
+                    </div>
+                    <h3 class="content-title">EduTech Pro 2026 Platform Release</h3>
+                    <div class="content-company">SmartLearn Technologies</div>
+                    <div class="content-text">
+                        Announced the launch of their next-generation learning management system 
+                        with AI-powered personalized learning paths and advanced analytics. 
+                        Targeting K-12 market with competitive pricing at $12/student/year.
+                    </div>
+                    <div class="content-metrics">
+                        <div class="metric">
+                            <i class="fas fa-eye"></i>
+                            2.3K views
+                        </div>
+                        <div class="metric">
+                            <i class="fas fa-share"></i>
+                            156 shares
+                        </div>
+                        <div class="metric engagement-high">
+                            <i class="fas fa-chart-line"></i>
+                            High engagement
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-item announcement-item">
+                    <div class="content-header">
+                        <span class="content-type">Partnership</span>
+                        <span class="content-date">1 day ago</span>
+                    </div>
+                    <h3 class="content-title">Strategic Alliance with Microsoft Education</h3>
+                    <div class="content-company">ClassroomConnect Inc.</div>
+                    <div class="content-text">
+                        Formed strategic partnership to integrate Microsoft Teams for Education 
+                        with their classroom management platform. Joint go-to-market strategy 
+                        targeting large school districts.
+                    </div>
+                    <div class="content-metrics">
+                        <div class="metric">
+                            <i class="fas fa-eye"></i>
+                            1.8K views
+                        </div>
+                        <div class="metric">
+                            <i class="fas fa-share"></i>
+                            89 shares
+                        </div>
+                        <div class="metric engagement-medium">
+                            <i class="fas fa-chart-line"></i>
+                            Medium engagement
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <i class="fab fa-twitter" style="color: #8b5cf6;"></i>
+                    Social Media Activity
+                </div>
+
+                <div class="content-item social-item">
+                    <div class="content-header">
+                        <span class="content-type">LinkedIn</span>
+                        <span class="content-date">2 hours ago</span>
+                    </div>
+                    <div class="content-company">EduVision Systems</div>
+                    <div class="content-text">
+                        "Excited to announce our Q1 2026 results: 40% growth in K-12 deployments! 
+                        Our AI-powered assessment tools are transforming how schools measure student 
+                        progress. #EdTech #AI #Education"
+                    </div>
+                    <div class="content-metrics">
+                        <div class="metric">
+                            <i class="fas fa-heart"></i>
+                            342 likes
+                        </div>
+                        <div class="metric">
+                            <i class="fas fa-comment"></i>
+                            28 comments
+                        </div>
+                        <div class="metric engagement-high">
+                            <i class="fas fa-fire"></i>
+                            Trending
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-item social-item">
+                    <div class="content-header">
+                        <span class="content-type">Twitter</span>
+                        <span class="content-date">4 hours ago</span>
+                    </div>
+                    <div class="content-company">TechClassroom Ltd.</div>
+                    <div class="content-text">
+                        "Just closed a major deal with Texas Education Agency! 500+ schools will 
+                        be using our virtual reality science labs starting fall 2026. The future 
+                        of education is here! 🚀 #VR #STEM #Education"
+                    </div>
+                    <div class="content-metrics">
+                        <div class="metric">
+                            <i class="fas fa-retweet"></i>
+                            156 retweets
+                        </div>
+                        <div class="metric">
+                            <i class="fas fa-heart"></i>
+                            423 likes
+                        </div>
+                        <div class="metric engagement-high">
+                            <i class="fas fa-chart-line"></i>
+                            High engagement
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-item social-item">
+                    <div class="content-header">
+                        <span class="content-type">Instagram</span>
+                        <span class="content-date">6 hours ago</span>
+                    </div>
+                    <div class="content-company">NextGen Learning</div>
+                    <div class="content-text">
+                        Behind-the-scenes look at our new product development lab where we're 
+                        creating the next generation of interactive whiteboards with haptic 
+                        feedback technology.
+                    </div>
+                    <div class="content-metrics">
+                        <div class="metric">
+                            <i class="fas fa-heart"></i>
+                            892 likes
+                        </div>
+                        <div class="metric">
+                            <i class="fas fa-comment"></i>
+                            67 comments
+                        </div>
+                        <div class="metric engagement-medium">
+                            <i class="fas fa-chart-line"></i>
+                            Medium engagement
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-item social-item">
+                    <div class="content-header">
+                        <span class="content-type">YouTube</span>
+                        <span class="content-date">1 day ago</span>
+                    </div>
+                    <div class="content-company">DigitalEd Solutions</div>
+                    <div class="content-text">
+                        "How AI is Revolutionizing Personalized Learning" - New video showcasing 
+                        their adaptive learning algorithms and real classroom implementations. 
+                        Features case studies from 3 major school districts.
+                    </div>
+                    <div class="content-metrics">
+                        <div class="metric">
+                            <i class="fas fa-play"></i>
+                            5.2K views
+                        </div>
+                        <div class="metric">
+                            <i class="fas fa-thumbs-up"></i>
+                            234 likes
+                        </div>
+                        <div class="metric engagement-medium">
+                            <i class="fas fa-chart-line"></i>
+                            Growing
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

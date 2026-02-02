@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Press Clipping Monitor | Intelligence Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f87171;
+        }
+
+        .topics-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .topic-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid #f87171;
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .article-count {
+            background: rgba(248, 113, 113, 0.2);
+            color: #f87171;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .sentiment-score {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sentiment-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(148, 163, 184, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .sentiment-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        .positive { background: #34d399; }
+        .neutral { background: #fbbf24; }
+        .negative { background: #f87171; }
+
+        .articles-section {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .article-item {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--sentiment-color);
+        }
+
+        .article-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .article-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .article-source {
+            background: rgba(148, 163, 184, 0.2);
+            color: #cbd5e1;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .article-date {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .article-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .article-excerpt {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .sentiment-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .sentiment-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+            <h1 class="page-title">PRESS-CLIPPING MONITOR</h1>
+            <div></div>
+        </div>
+
+        <div class="topics-section">
+            <div class="section-title">
+                <i class="fas fa-tags" style="color: #f87171;"></i>
+                Topics of Interest
+            </div>
+
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <div class="topic-name">AI in Education</div>
+                        <div class="article-count">12 articles</div>
+                    </div>
+                    <div class="sentiment-score">
+                        <span style="font-size: 0.9rem; color: #94a3b8;">Sentiment:</span>
+                        <div class="sentiment-bar">
+                            <div class="sentiment-fill positive" style="width: 78%;"></div>
+                        </div>
+                        <span style="font-size: 0.9rem; font-weight: 600; color: #34d399;">7.8/10</span>
+                    </div>
+                </div>
+
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <div class="topic-name">Digital Learning Platforms</div>
+                        <div class="article-count">8 articles</div>
+                    </div>
+                    <div class="sentiment-score">
+                        <span style="font-size: 0.9rem; color: #94a3b8;">Sentiment:</span>
+                        <div class="sentiment-bar">
+                            <div class="sentiment-fill positive" style="width: 65%;"></div>
+                        </div>
+                        <span style="font-size: 0.9rem; font-weight: 600; color: #34d399;">6.5/10</span>
+                    </div>
+                </div>
+
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <div class="topic-name">EdTech Funding</div>
+                        <div class="article-count">6 articles</div>
+                    </div>
+                    <div class="sentiment-score">
+                        <span style="font-size: 0.9rem; color: #94a3b8;">Sentiment:</span>
+                        <div class="sentiment-bar">
+                            <div class="sentiment-fill neutral" style="width: 55%;"></div>
+                        </div>
+                        <span style="font-size: 0.9rem; font-weight: 600; color: #fbbf24;">5.5/10</span>
+                    </div>
+                </div>
+
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <div class="topic-name">Cybersecurity in Schools</div>
+                        <div class="article-count">4 articles</div>
+                    </div>
+                    <div class="sentiment-score">
+                        <span style="font-size: 0.9rem; color: #94a3b8;">Sentiment:</span>
+                        <div class="sentiment-bar">
+                            <div class="sentiment-fill negative" style="width: 35%;"></div>
+                        </div>
+                        <span style="font-size: 0.9rem; font-weight: 600; color: #f87171;">3.5/10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="articles-section">
+            <div class="section-title">
+                <i class="fas fa-newspaper" style="color: #f87171;"></i>
+                Recent Articles
+            </div>
+
+            <div class="article-item" style="--sentiment-color: #34d399;">
+                <div class="article-header">
+                    <span class="article-source">TechCrunch</span>
+                    <span class="article-date">2 hours ago</span>
+                </div>
+                <h3 class="article-title">AI-Powered Tutoring Systems Show 40% Improvement in Student Outcomes</h3>
+                <div class="article-excerpt">
+                    A comprehensive study across 200 schools reveals that AI-powered personalized tutoring systems 
+                    have led to significant improvements in student performance, particularly in mathematics and science. 
+                    The technology adapts to individual learning styles and provides real-time feedback...
+                </div>
+                <div class="article-meta">
+                    <div class="sentiment-label">
+                        <div class="sentiment-icon positive"></div>
+                        Positive sentiment
+                    </div>
+                    <div>2.3K shares • 156 comments</div>
+                </div>
+            </div>
+
+            <div class="article-item" style="--sentiment-color: #34d399;">
+                <div class="article-header">
+                    <span class="article-source">Education Week</span>
+                    <span class="article-date">4 hours ago</span>
+                </div>
+                <h3 class="article-title">Major School Districts Embrace Cloud-Based Learning Management Systems</h3>
+                <div class="article-excerpt">
+                    Following successful pilot programs, five major school districts announced their transition to 
+                    cloud-based LMS platforms. The move is expected to improve accessibility and reduce IT costs 
+                    while providing better analytics for educators...
+                </div>
+                <div class="article-meta">
+                    <div class="sentiment-label">
+                        <div class="sentiment-icon positive"></div>
+                        Positive sentiment
+                    </div>
+                    <div>1.8K shares • 89 comments</div>
+                </div>
+            </div>
+
+            <div class="article-item" style="--sentiment-color: #fbbf24;">
+                <div class="article-header">
+                    <span class="article-source">EdTech Magazine</span>
+                    <span class="article-date">6 hours ago</span>
+                </div>
+                <h3 class="article-title">Budget Constraints Challenge EdTech Adoption in Rural Schools</h3>
+                <div class="article-excerpt">
+                    While urban districts rapidly adopt new educational technologies, rural schools face significant 
+                    budget constraints that limit their ability to implement digital learning solutions. Experts 
+                    call for targeted funding programs to bridge the digital divide...
+                </div>
+                <div class="article-meta">
+                    <div class="sentiment-label">
+                        <div class="sentiment-icon neutral"></div>
+                        Neutral sentiment
+                    </div>
+                    <div>945 shares • 67 comments</div>
+                </div>
+            </div>
+
+            <div class="article-item" style="--sentiment-color: #f87171;">
+                <div class="article-header">
+                    <span class="article-source">Cybersecurity Today</span>
+                    <span class="article-date">8 hours ago</span>
+                </div>
+                <h3 class="article-title">Rising Cyber Threats Target Educational Institutions</h3>
+                <div class="article-excerpt">
+                    A new report reveals a 60% increase in cyberattacks targeting schools and universities over 
+                    the past year. Ransomware attacks have disrupted learning for thousands of students, 
+                    highlighting the urgent need for improved cybersecurity measures...
+                </div>
+                <div class="article-meta">
+                    <div class="sentiment-label">
+                        <div class="sentiment-icon negative"></div>
+                        Negative sentiment
+                    </div>
+                    <div>1.2K shares • 234 comments</div>
+                </div>
+            </div>
+
+            <div class="article-item" style="--sentiment-color: #34d399;">
+                <div class="article-header">
+                    <span class="article-source">Forbes</span>
+                    <span class="article-date">1 day ago</span>
+                </div>
+                <h3 class="article-title">EdTech Startups Raise Record $2.8B in Q1 2026 Funding</h3>
+                <div class="article-excerpt">
+                    The education technology sector continues to attract significant investment, with startups 
+                    raising a record $2.8 billion in the first quarter of 2026. AI-powered learning platforms 
+                    and virtual reality educational tools led the funding rounds...
+                </div>
+                <div class="article-meta">
+                    <div class="sentiment-label">
+                        <div class="sentiment-icon positive"></div>
+                        Positive sentiment
+                    </div>
+                    <div>3.1K shares • 198 comments</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

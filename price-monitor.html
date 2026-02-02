@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Monitor | Intelligence Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #60a5fa;
+        }
+
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #60a5fa;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .chart-section {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-container {
+            height: 300px;
+            margin-top: 1rem;
+        }
+
+        .products-table {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        th {
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .price-change {
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .positive { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .negative { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+        .product-name {
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+            <h1 class="page-title">PRICE MONITOR</h1>
+            <div></div>
+        </div>
+
+        <div class="stats-overview">
+            <div class="stat-card">
+                <div class="stat-number">247</div>
+                <div class="stat-label">Products Monitored</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Price Changes (24h)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">-2.3%</div>
+                <div class="stat-label">Avg. Variance</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$2.4M</div>
+                <div class="stat-label">Total Value Monitored</div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2 class="section-title">Price Trends (Last 30 Days)</h2>
+            <div class="chart-container">
+                <canvas id="priceChart"></canvas>
+            </div>
+        </div>
+
+        <div class="products-table">
+            <h2 class="section-title">Recent Price Changes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Current Price</th>
+                        <th>Previous Price</th>
+                        <th>Change</th>
+                        <th>Last Updated</th>
+                        <th>Supplier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="product-name">Educational Software License Pro</td>
+                        <td>$255.30</td>
+                        <td>$252.90</td>
+                        <td><span class="price-change positive">+0.95%</span></td>
+                        <td>2 hours ago</td>
+                        <td>TechEdu Solutions</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">Interactive Whiteboard 75"</td>
+                        <td>$1,847.50</td>
+                        <td>$1,895.00</td>
+                        <td><span class="price-change negative">-2.51%</span></td>
+                        <td>4 hours ago</td>
+                        <td>SmartBoard Inc.</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">Student Tablet Bundle (30 units)</td>
+                        <td>$8,450.00</td>
+                        <td>$8,200.00</td>
+                        <td><span class="price-change positive">+3.05%</span></td>
+                        <td>6 hours ago</td>
+                        <td>TabletPro Education</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">Classroom Audio System</td>
+                        <td>$425.80</td>
+                        <td>$425.80</td>
+                        <td><span class="price-change">0.00%</span></td>
+                        <td>1 day ago</td>
+                        <td>AudioTech Ltd.</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">Science Lab Equipment Set</td>
+                        <td>$3,250.00</td>
+                        <td>$3,180.00</td>
+                        <td><span class="price-change positive">+2.20%</span></td>
+                        <td>1 day ago</td>
+                        <td>LabSupply Co.</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">Library Management Software</td>
+                        <td>$189.99</td>
+                        <td>$195.50</td>
+                        <td><span class="price-change negative">-2.82%</span></td>
+                        <td>2 days ago</td>
+                        <td>LibraryTech Systems</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Initialize price trend chart
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan 1', 'Jan 5', 'Jan 10', 'Jan 15', 'Jan 20', 'Jan 25', 'Jan 30'],
+                datasets: [{
+                    label: 'Average Price Index',
+                    data: [100, 98.5, 102.3, 99.8, 105.2, 103.7, 97.7],
+                    borderColor: '#60a5fa',
+                    backgroundColor: 'rgba(96, 165, 250, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#f8fafc'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#94a3b8' },
+                        grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                    },
+                    y: {
+                        ticks: { color: '#94a3b8' },
+                        grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Monitor | Intelligence Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #34d399;
+        }
+
+        .announcements-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .announcement-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .tender-card { --accent-color: #f59e0b; }
+        .school-card { --accent-color: #34d399; }
+
+        .announcement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .announcement-type {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .announcement-date {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .announcement-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .announcement-school {
+            color: #60a5fa;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .announcement-details {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .announcement-meta {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .urgent {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+            <h1 class="page-title">SCHOOL MONITOR</h1>
+            <div></div>
+        </div>
+
+        <div class="section-title">
+            <i class="fas fa-gavel" style="color: #f59e0b;"></i>
+            Recent Tender Announcements
+        </div>
+
+        <div class="announcements-grid">
+            <div class="announcement-card tender-card">
+                <div class="announcement-header">
+                    <span class="announcement-type">New Tender</span>
+                    <span class="announcement-date">2 hours ago</span>
+                </div>
+                <h3 class="announcement-title">Digital Learning Platform Implementation</h3>
+                <div class="announcement-school">Metropolitan School District #247</div>
+                <div class="announcement-details">
+                    Seeking comprehensive digital learning platform for 15,000 students across 45 schools. 
+                    Requirements include LMS, student information system, parent portal, and mobile applications. 
+                    Budget: $2.8M over 3 years.
+                </div>
+                <div class="announcement-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        Deadline: Feb 28, 2026
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        $2.8M Budget
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        15,000 Students
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title" style="margin-top: 3rem;">
+            <i class="fas fa-bullhorn" style="color: #34d399;"></i>
+            School Announcements
+        </div>
+
+        <div class="announcements-grid">
+            <div class="announcement-card school-card">
+                <div class="announcement-header">
+                    <span class="announcement-type">Policy Update</span>
+                    <span class="announcement-date">4 hours ago</span>
+                </div>
+                <h3 class="announcement-title">New Technology Procurement Guidelines</h3>
+                <div class="announcement-school">Riverside Unified School District</div>
+                <div class="announcement-details">
+                    Updated procurement guidelines for educational technology purchases over $50,000. 
+                    New requirements include cybersecurity compliance, accessibility standards, and 
+                    environmental impact assessments.
+                </div>
+                <div class="announcement-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-shield-alt"></i>
+                        Security Focus
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-universal-access"></i>
+                        Accessibility Required
+                    </div>
+                </div>
+            </div>
+
+            <div class="announcement-card school-card">
+                <div class="announcement-header">
+                    <span class="announcement-type">Budget Allocation</span>
+                    <span class="announcement-date">1 day ago</span>
+                </div>
+                <h3 class="announcement-title">STEM Equipment Budget Approved</h3>
+                <div class="announcement-school">Oakwood High School</div>
+                <div class="announcement-details">
+                    Board approved $450,000 budget for new STEM laboratory equipment including 
+                    3D printers, robotics kits, and advanced microscopy systems. Procurement 
+                    process to begin March 2026.
+                </div>
+                <div class="announcement-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-flask"></i>
+                        STEM Focus
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        $450K Budget
+                    </div>
+                    <div class="urgent">High Priority</div>
+                </div>
+            </div>
+
+            <div class="announcement-card school-card">
+                <div class="announcement-header">
+                    <span class="announcement-type">Infrastructure</span>
+                    <span class="announcement-date">2 days ago</span>
+                </div>
+                <h3 class="announcement-title">Network Infrastructure Upgrade Plan</h3>
+                <div class="announcement-school">Central Valley Education Consortium</div>
+                <div class="announcement-details">
+                    Multi-phase network upgrade across 12 schools to support increased bandwidth 
+                    requirements for digital learning initiatives. Phase 1 focuses on fiber 
+                    backbone installation.
+                </div>
+                <div class="announcement-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-network-wired"></i>
+                        Network Upgrade
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-building"></i>
+                        12 Schools
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
