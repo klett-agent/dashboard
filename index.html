@@ -263,6 +263,11 @@
         .notification-content {
             padding: 16px 20px;
             padding-left: 24px;
+            transition: background-color 0.2s ease;
+        }
+
+        .notification-content:hover {
+            background: rgba(148, 163, 184, 0.05);
         }
 
         .notification-header {
@@ -888,6 +893,9 @@
 
                 this.container.appendChild(notification);
                 
+                // Add click functionality to redirect to appropriate page
+                this.addClickHandler(notification, title);
+                
                 // Add swipe functionality
                 this.addSwipeHandlers(notification);
                 
@@ -903,6 +911,42 @@
                 notification.autoRemoveTimeout = autoRemoveTimeout;
 
                 return notification;
+            }
+
+            addClickHandler(notification, title) {
+                const content = notification.querySelector('.notification-content');
+                content.style.cursor = 'pointer';
+                
+                content.addEventListener('click', (e) => {
+                    // Don't trigger if clicking the close button
+                    if (e.target.classList.contains('notification-close')) {
+                        return;
+                    }
+                    
+                    // Get the full message content for better routing decisions
+                    const message = notification.querySelector('.notification-message').textContent;
+                    let targetPage = '';
+                    
+                    // Route based on notification title and message content
+                    if (title.includes('Price') || title.includes('Product') || message.includes('price') || message.includes('Product #')) {
+                        targetPage = 'price-monitor.html';
+                    } else if (title.includes('Tender') || title.includes('School') || title.includes('University') || 
+                               message.includes('tender') || message.includes('School District') || message.includes('University')) {
+                        targetPage = 'school-monitor.html';
+                    } else if (title.includes('Competitor') || title.includes('Marketing') || title.includes('Campaign') || 
+                               message.includes('marketing campaign') || message.includes('TechCorp') || message.includes('social media posts')) {
+                        targetPage = 'competition-monitor.html';
+                    } else if (title.includes('Media') || title.includes('Article') || title.includes('News') || 
+                               message.includes('article') || message.includes('TechNews') || message.includes('mentioned')) {
+                        targetPage = 'press-clipping.html';
+                    } else {
+                        // Default fallback - stay on dashboard
+                        return;
+                    }
+                    
+                    // Navigate to the appropriate page
+                    window.location.href = targetPage;
+                });
             }
 
             addSwipeHandlers(notification) {

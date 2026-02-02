@@ -115,3 +115,15 @@
 
 # 2026-02-02 19:15:26.195640
 +N
+
+# 2026-02-02 19:17:43.976235
++if user click on notification message, it will be redirected to appropriate page related (e.g. blue to PRICE MONITOR)
+
+# 2026-02-02 19:18:04.043419
++N
+
+# 2026-02-02 19:19:00.055357
++not all should go to PRICE MONITOR ... depends on which field is relative there you are routed
+
+# 2026-02-02 19:19:11.810569
++N
